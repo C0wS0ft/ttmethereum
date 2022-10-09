@@ -30,7 +30,7 @@ func (e *EthereumRequest) CurrentBlockNumber(ctx context.Context) (uint64, error
 }
 
 // GetBlockByNumber return block by number
-func (e *EthereumRequest) GetBlockByNumber(ctx context.Context, num uint64) (*types.Block, error) {
+func (e *EthereumRequest) GetBlockByNumber(ctx context.Context, num uint64) (*Block, error) {
 	block, err := e.client.BlockByNumber(ctx, big.NewInt(int64(num)))
 
 	return block, errors.Wrap(err, "unable to get block by number")
@@ -140,7 +140,7 @@ func (e *EthereumRequest) GetERC20TokenBalance(ctx context.Context, tokenAddress
 	return bal.Uint64(), nil
 }
 
-func (e *EthereumRequest) GetTransactionFrom(ctx context.Context, transaction *types.Transaction) (string, error) {
+func (e *EthereumRequest) GetTransactionFrom(ctx context.Context, transaction *Transaction) (string, error) {
 	msg, err := transaction.AsMessage(types.LatestSignerForChainID(transaction.ChainId()), nil)
 	if err != nil {
 		return "", err

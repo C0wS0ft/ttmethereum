@@ -17,7 +17,8 @@ const (
 )
 
 type (
-	Transaction types.Transaction
+	Transaction = types.Transaction
+	Block       = types.Block
 
 	EthereumRequest struct {
 		client *ethclient.Client
@@ -25,7 +26,7 @@ type (
 
 	TTMTron interface {
 		CurrentBlockNumber(context.Context) (uint64, error)
-		GetBlockByNumber(context.Context, uint64) (*types.Block, error)
+		GetBlockByNumber(context.Context, uint64) (*Block, error)
 		GetNativeCoinBalance(context.Context, string, string) (uint64, error)
 
 		GetERC20TokenSymbol(context.Context, string, string) (string, error)
@@ -33,6 +34,6 @@ type (
 		GetERC20TokenBalance(context.Context, string, string) (uint64, error)
 		GetERC20TokenName(context.Context, string) (string, error)
 
-		GetTransactionFrom(ctx context.Context, transaction *types.Transaction) (string, error)
+		GetTransactionFrom(ctx context.Context, transaction *Transaction) (string, error)
 	}
 )
